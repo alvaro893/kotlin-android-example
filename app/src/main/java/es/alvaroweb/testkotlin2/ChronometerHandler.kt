@@ -40,7 +40,7 @@ class ChronometerHandler(chronometerView: TextView, activity: Activity, savedTim
     private fun updateChronometer() {
         Log.d("chronometer", "time:$mCurrentTime")
        mActivity?.runOnUiThread {
-           invalidate()
+           refreshTime()
        }
     }
 
@@ -57,7 +57,7 @@ class ChronometerHandler(chronometerView: TextView, activity: Activity, savedTim
             isChronometerRunning = false
         }else{
             isChronometerRunning = true
-            invalidate()
+            refreshTime()
             initThread()
             mThread.start()
         }
@@ -74,13 +74,19 @@ class ChronometerHandler(chronometerView: TextView, activity: Activity, savedTim
 
     fun setTime(time: Int?){
         mCurrentTime = time ?: return
+        refreshTime()
     }
 
     fun  getCurrrentTime(): Int {
         return mCurrentTime;
     }
 
-    fun invalidate() {
+    fun refreshTime() {
         mView?.text = formatTime(mCurrentTime)
+    }
+
+    fun add(secs: Int) {
+        mCurrentTime += secs
+        refreshTime()
     }
 }

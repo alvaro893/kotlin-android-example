@@ -24,10 +24,11 @@ class OtherActivity : AppCompatActivity() {
             togglePlayButon(view as ImageButton)
         }
 
-        reload_button.setOnClickListener { view ->
-            mChronometer?.setTime(0)
-            mChronometer?.invalidate()
-        }
+        reload_button.setOnClickListener { view -> mChronometer?.setTime(0) }
+
+        plus_one_minute_button.setOnClickListener { view -> mChronometer?.add(60) }
+
+        plus_one_hour_button.setOnClickListener { view -> mChronometer?.add(3600) }
     }
 
     private fun togglePlayButon(imageButton: ImageButton) {
